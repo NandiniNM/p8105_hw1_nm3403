@@ -1,0 +1,100 @@
+---
+title: "P8105 HW1"
+output: github_document
+---
+
+```{r}
+library(tidyverse)
+```
+
+Let's import the 'FAS_litters.csv' csv using a relative path.
+
+```{r}
+litters_df = 
+  read_csv("data/Fas_litters.csv")
+
+litters_df = 
+  janitor::clean_names(litters_df)
+
+litters_df
+
+```
+
+Janitor cleans up column names by making lower case and converting to snake case
+
+Let's import the 'FAS_litters.csv' csv using an absolute path.
+
+```{r}
+#litters_df = 
+  #read_csv("~/Documents/R/Data Science/data_wrangling_1/data/FAS_litters.csv")
+```
+This line isn't working, come back to it later.
+
+Let's import the 'FAS_pups.csv' csv using a relative path.
+
+```{r}
+pups_df = 
+  read_csv("data/Fas_pups.csv")
+
+pups_df = 
+  janitor::clean_names(pups_df)
+```
+
+## Look at data
+
+```{r}
+litters_df # prints first 10 rows of data
+
+head(litters_df) # prints first 6 rows of data
+
+tail(litters_df) # prints end of the dataset
+```
+
+View the entire dataset
+
+```{r, eval = FALSE}
+view(litters_df)
+```
+
+Look at a data summary
+
+```{r}
+str(litters_df)
+
+skimr::skim(litters_df)
+```
+
+## Options in 'read_*'
+
+```{r}
+litters_df = 
+  read_csv("data/FAS_litters.csv")
+#automatically assumes first row is column names and reads in data accordingly
+
+litters_df = 
+  read_csv("data/FAS_litters.csv",
+           skip = 10, col_names = FALSE)
+#skips first 10 rows, and does not assume first row is column names, R will assign its own names to columns
+
+```
+
+look at NA values
+
+```{r}
+litters_df = 
+  read_csv("data/FAS_litters.csv",
+           na = c("NA",19))
+#assigns values as NA and re-codes the  - anywhere that has "NA" or 19 is treated as missing variable
+```
+
+Column types
+
+```{r}
+litters_df = 
+  read_csv("data/FAS_litters.csv",
+           col_types = 
+             cols(
+               Group = col_factor(),
+             ))
+```
+

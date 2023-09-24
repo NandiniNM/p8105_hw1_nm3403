@@ -2,6 +2,7 @@
 title: "P8105 HW1"
 output: github_document
 ---
+## Question 1
 
 Load in the "moderndive" and tidyverse package.
 
@@ -16,7 +17,7 @@ Load in the "early_january_weather" dataset.
 data("early_january_weather")
 ```
 
-## Description of dataset.
+### Description of dataset.
 
 ```{r}
 summary(early_january_weather)
@@ -29,7 +30,7 @@ Variables included in this dataset are year, month, day, hour, temp, dewp, humid
 The data was collected in 2013 during the first 15 days of January, throughout the entire 24 hours for each day.
 The mean temperature is 39.58 degrees. 
 
-## Make scatterplot
+### Make scatterplot
 
 ```{r}
 jan_scatterplot = 
@@ -38,4 +39,30 @@ jan_scatterplot =
 ggsave("jan_scatterplot.pdf",jan_scatterplot,pdf)
 ```
 
+The scatterplot appears to have a cyclical pattern with humidity increasing towards the right side of the graph. It appears that for each day in January, the temperature peaks at the start of the day during data collection and slowly decreases as the day progresses. The highest temperature occurs around Jan 14 while the lowest temperature occurs around the beginning of the month.
+
+## Question 2
+
+### Create dataframe
+
+```{r}
+df = 
+  tibble(
+    w = rnorm(10, sd=2),
+    x = w > 0,
+    y = c('a','b','c','d','e','f','g','h','i','j'),
+    z = factor(c('4','3','1','16','24','18','5','9','8','2'),
+              levels = c("Prime","Composite","Neither"))
+  )
+
+w = pull(df,w)
+x = pull(df,x)
+y = pull(df,y)
+z = pull(df,z)
+
+mean(w)
+mean(x)
+mean(y)
+mean(z)
+```
 
